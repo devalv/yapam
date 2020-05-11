@@ -1,0 +1,16 @@
+{
+  "LOG_DATE_FMT": "%H:%M:%S",
+  "LOG_FMT": "%(asctime)s.%(msecs)d|%(levelname).1s|%(message)s",
+  "LOG_LVL": "DEBUG",
+  "AMMO_FILE": "ammo2",
+  "REQUESTS": [
+    {
+      "host": "127.0.0.1",
+      "url":  "AUTH",
+      "method":  "POST",
+      "case":  "CONFIG_CASE1",
+      "extra_headers":
+        {"Authentication": "jwt QWEASDASD"}
+    }
+  ]
+}
