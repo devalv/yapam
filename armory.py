@@ -4,18 +4,6 @@
 import argparse
 import sys
 
-
-# TODO: подключить модное покрытие тестами для github
-# TODO: ci/cd
-# TODO: readme
-# TODO: подключить pytest
-#
-# pytest.ini
-# [pytest]
-# addopts = --cov-report=xml --cov=<path> --flake8
-# testpaths = <test_paths>
-#
-
 from dav_utils.config import Config
 from dav_utils.descriptors import (DictType, HttpMethod, IntType,
                                    StringType, WritableFile)
@@ -102,8 +90,9 @@ class AmmoConfig(Config):
     requests = ConfigRequestType('requests')
     ammo_file = StringType('ammo_file')
 
-    def create_template(self, file_path: str):
-        """Create JSON config file template."""
+    @property
+    def template_blueprint(self):
+        """Template blueprint."""
         config_template = {
             'LOG_DATE_FMT': '%H:%M:%S',
             'LOG_FMT': '%(asctime)s.%(msecs)d|%(levelname).1s|%(message)s',
@@ -118,7 +107,11 @@ class AmmoConfig(Config):
                     'body': '{\"username\": \"tank_user_0\", \"password\": \"tank_user_0\"}'
                 }]
         }
-        self.save_json_file(file_path, config_template)
+        return config_template
+
+    def create_template(self, file_path: str):
+        """Create JSON config file template."""
+        self.save_json_file(file_path, self.template_blueprint)
         self.log.info('Template {file_path} created.'.format(file_path=file_path))
 
 
