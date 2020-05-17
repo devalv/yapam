@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 """Yet another phantom ammo maker."""
@@ -35,8 +34,9 @@ class AmmoConfig(Config):
                   "url":  "AUTH",           # server handler URL (where tank will shoot).
                   "method":  "POST",        # request method.
                   "case":  "CONFIG_CASE1",  # test case tag in report.
-                  "extra_headers":          # additional request headers.
-                    {"Authentication": "jwt QWEASDASD"}
+                  "extra_headers": {}       # additional request headers.
+                  "body": "user=user"       # body string (json-type)
+                  "port": 443               # port where handler runs. default value is 80. int.
                 }
             ]
 
@@ -48,6 +48,25 @@ class AmmoConfig(Config):
 
     requests = ListType('requests')
     ammo_file = StringType('ammo_file')
+
+    def create_template(self, file_path: str):
+        """Create JSON config file template."""
+        config_template = {
+            'LOG_DATE_FMT': '%H:%M:%S',
+            'LOG_FMT': '%(asctime)s.%(msecs)d|%(levelname).1s|%(message)s',
+            'LOG_LVL': 'DEBUG',
+            'AMMO_FILE': 'ammo',
+            'REQUESTS': [
+                {
+                    'host': '127.0.0.1',
+                    'port': 80,
+                    'url': 'AUTH',
+                    'method': 'POST',
+                    'body': '{\"username\": \"tank_user_0\", \"password\": \"tank_user_0\"}'
+                }]
+        }
+        self.save_json_file(file_path, config_template)
+        self.log.info('Template {file_path} created.'.format(file_path=file_path))
 
 
 class PhantomAmmo:
@@ -174,6 +193,7 @@ class Armory(Util):
 
         requests: list of a request-hashes from config
         ammo_file: path to a file where results should be saved
+        logger: config logger.
         """
         self.requests = requests
         self.ammo_file_path = ammo_file_path
@@ -185,7 +205,7 @@ class Armory(Util):
         self.save_text_file(file_path=self.ammo_file_path, txt_data=ammo_gen)
 
 
-def parse_args():  # pragma: no cover
+def parse_args():
     """Парсер входных аргументов скрипта."""
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', default='config.json', type=str,
@@ -199,7 +219,6 @@ def main():  # noqa
     args = parse_args()
 
     if args.template:
-        # TODO: расширить экспорт
         cfg = AmmoConfig()
         cfg.log.debug('Trying to create template of configuration file.')
         cfg.create_template(args.config)
