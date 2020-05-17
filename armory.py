@@ -18,8 +18,61 @@ import sys
 
 from dav_utils.config import Config
 from dav_utils.descriptors import (DictType, HttpMethod, IntType,
-                                   ListType, StringType, WritableFile)
+                                   StringType, WritableFile)
 from dav_utils.utils import Util
+
+
+class ConfigRequest:
+    """Structure of Config.requests list element.
+
+    host:           request host parameter (host where tank will shoot).
+    url:            request url parameter (handler where tank will shoot).
+    method:         request method.
+    case:           test case tag in report. default value is url.
+    extra_headers:  additional request headers (dict)
+    body:           request body string.
+    port:           request port where handler runs. default value is 80.
+    """
+
+    method = HttpMethod('method')
+    url = StringType('url')
+    host = StringType('host')
+    body = StringType('body')
+    port = IntType('port')
+    extra_headers = DictType('extra_headers')
+
+    def __init__(self, host: str, url: str, method: str, case: str = None, port: int = 80, extra_headers: dict = None,
+                 body: str = None):
+        """Validate parameters and create instance of ConfigRequest."""
+        self.method = method
+        self.url = url
+        self.host = host
+        self.port = port
+        self.case = case if case else url
+        self.extra_headers = extra_headers if extra_headers else dict()
+        self.body = body if body else ''
+
+
+class ConfigRequestType:
+    """Descriptor for ConfigRequestType checking."""
+
+    def __init__(self, name):
+        """Set attribute name."""
+        self.name = name
+
+    def __set__(self, instance, raw_values_list: list):
+        """Check that raw_value_list is a list and create ConfigRequest instance for each list element."""
+        if isinstance(raw_values_list, list):
+            try:
+                instance.__dict__[self.name] = [ConfigRequest(**value) for value in raw_values_list]
+            except TypeError:
+                raise TypeError(f'{self.name} contains bad parameters.')
+        else:
+            raise TypeError(f'{self.name} should be a list.')
+
+    def __get__(self, instance, class_):
+        """Return attribute value."""
+        return instance.__dict__[self.name]
 
 
 class AmmoConfig(Config):
@@ -46,7 +99,7 @@ class AmmoConfig(Config):
         log_lvl: log level (logging.DEBUG, logging.INFO and etc.)
     """
 
-    requests = ListType('requests')
+    requests = ConfigRequestType('requests')
     ammo_file = StringType('ammo_file')
 
     def create_template(self, file_path: str):
@@ -109,16 +162,9 @@ class PhantomAmmo:
         '{request}\r\n\r\n'
     )
 
-    method = HttpMethod('method')
-    url = StringType('url')
-    host = StringType('host')
-    body = StringType('body')
-    port = IntType('port')
-    extra_headers = DictType('extra_headers')
-
-    def __init__(self, log: Config.log, method: str, url: str, host: str, case: str = None, port: int = 80,
-                 extra_headers: dict = None,
-                 body: str = None):
+    def __init__(self, log: Config.log, method: str, url: str, host: str, case: str, port: int,
+                 extra_headers: dict,
+                 body: str):
         """Phantom-type bullet constructor.
 
         method: one of allowed http methods.
@@ -141,14 +187,14 @@ class PhantomAmmo:
         self.host = host
 
         self.port = port
-        self.case = case if case else url
+        self.case = case
 
-        headers = extra_headers if extra_headers else dict()
+        headers = extra_headers
         self.default_headers['Host'] = '{host}:{port}'.format(host=self.host, port=self.port)
         headers.update(self.default_headers)
 
         self.headers = headers
-        self.body = body if body else ''
+        self.body = body
 
     @property
     def headers(self) -> str:
@@ -201,7 +247,16 @@ class Armory(Util):
 
     def generate_ammo(self):
         """Generate and write Phantom ammo to a text file."""
-        ammo_gen = (PhantomAmmo(log=self.log, **request).bullet for request in self.requests)
+        ammo_gen = (
+            PhantomAmmo(log=self.log,
+                        method=request.method,
+                        url=request.url,
+                        host=request.host,
+                        case=request.case,
+                        port=request.port,
+                        extra_headers=request.extra_headers,
+                        body=request.body).bullet for request in self.requests
+        )
         self.save_text_file(file_path=self.ammo_file_path, txt_data=ammo_gen)
 
 
