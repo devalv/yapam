@@ -19,7 +19,7 @@ def good_config_request():
         'port': 8888,
         'url': '/auth',
         'method': 'POST',
-        'body': '{\"username\": \"admin\", \"password\": \"veil\"}'
+        'body': '{\"username\": \"admin\", \"password\": \"admin\"}'
     }
     return request_dict
 
@@ -32,7 +32,7 @@ def bad_config_request():
         'port': 8888,
         'url': '/auth',
         'method': 'POST',
-        'body': '{\"username\": \"admin\", \"password\": \"veil\"}',
+        'body': '{\"username\": \"admin\", \"password\": \"admin\"}',
         'headers': 'headers'
     }
     return request_dict

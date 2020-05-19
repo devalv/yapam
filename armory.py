@@ -155,9 +155,10 @@ class PhantomAmmo:
         '{request}\r\n\r\n'
     )
 
-    def __init__(self, log: Config.log, method: str, url: str, host: str, case: str, port: int,
+    def __init__(self, method: str, url: str, host: str, case: str, port: int,
                  extra_headers: dict,
-                 body: str):
+                 body: str,
+                 log: Config.log = None):
         """Phantom-type bullet constructor.
 
         method: one of allowed http methods.
@@ -173,6 +174,7 @@ class PhantomAmmo:
                  'Content-Type': 'application/json',
                  'Connection': 'Close'}
         body: request body.
+        log: logger instance for debug messages.
         """
         self.log = log
         self.method = method
@@ -218,7 +220,8 @@ class PhantomAmmo:
         """Phantom-type bullet for tank."""
         request = self.request
         ammo = self.ammo_template.format(request_length=len(request), case=self.case, request=request)
-        self.log.debug(ammo.replace('\r\n', ', ').replace('\n', ', '))
+        if self.log:
+            self.log.debug(ammo.replace('\r\n', ', ').replace('\n', ', '))
         return ammo
 
 
