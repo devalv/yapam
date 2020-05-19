@@ -254,6 +254,7 @@ class Armory(Util):
                         body=request.body).bullet for request in self.requests
         )
         self.save_text_file(file_path=self.ammo_file_path, txt_data=ammo_gen)
+        return True
 
 
 def parse_args():

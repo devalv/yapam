@@ -29,4 +29,17 @@ def logger(temporary_log_file):
 @pytest.fixture(scope='session')
 def temporary_ammo_file(tmpdir_factory):
     """Temporary ammo file."""
-    return tmpdir_factory.mktemp('data').join('ammo')
+    return str(tmpdir_factory.mktemp('data').join('ammo'))
+
+
+@pytest.fixture
+def config_request():
+    """Fixture with parameters in the ConfigRequest."""
+    request_dict = {
+        'host': '127.0.0.1',
+        'port': 8888,
+        'url': '/auth',
+        'method': 'POST',
+        'body': '{\"username\": \"admin\", \"password\": \"admin\"}'
+    }
+    return request_dict

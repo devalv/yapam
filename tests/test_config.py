@@ -12,19 +12,6 @@ pytestmark = [pytest.mark.config]
 
 
 @pytest.fixture
-def good_config_request():
-    """Fixture with parameters in the ConfigRequest."""
-    request_dict = {
-        'host': '127.0.0.1',
-        'port': 8888,
-        'url': '/auth',
-        'method': 'POST',
-        'body': '{\"username\": \"admin\", \"password\": \"admin\"}'
-    }
-    return request_dict
-
-
-@pytest.fixture
 def bad_config_request():
     """Fixture with parameters missing in the ConfigRequest."""
     request_dict = {
@@ -69,9 +56,9 @@ def bad_config_file(tmpdir_factory):
 class TestConfigRequest:
     """ConfigRequest test cases."""
 
-    def test_good_request(self, good_config_request):
+    def test_good_request(self, config_request):
         """Check that expected request structure allowed."""
-        request_instance = ConfigRequest(**good_config_request)
+        request_instance = ConfigRequest(**config_request)
         assert isinstance(request_instance, ConfigRequest)
 
     def test_bad_request(self, bad_config_request):
