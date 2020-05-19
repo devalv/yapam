@@ -1,28 +1,11 @@
 # -*- coding: utf-8 -*-
 """Phantom test cases."""
-import logging
-
 from armory import PhantomAmmo
 
 import pytest
 
 
 pytestmark = [pytest.mark.phantom]
-
-
-@pytest.fixture(scope='session')
-def temporary_log_file(tmpdir_factory):
-    """Temporary log file."""
-    return tmpdir_factory.mktemp('data').join('tmp.log')
-
-
-@pytest.fixture
-def logger(temporary_log_file):
-    """Fixture with logger instance."""
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.DEBUG)
-    logger.addHandler(logging.FileHandler(temporary_log_file))
-    return logger
 
 
 @pytest.fixture

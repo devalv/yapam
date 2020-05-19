@@ -65,12 +65,6 @@ def bad_config_file(tmpdir_factory):
     return fn
 
 
-@pytest.fixture(scope='session')
-def temporary_json_file(tmpdir_factory):
-    """Temporary JSON file."""
-    return tmpdir_factory.mktemp('data').join('cfg.json')
-
-
 @pytest.mark.request
 class TestConfigRequest:
     """ConfigRequest test cases."""

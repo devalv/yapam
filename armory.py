@@ -233,9 +233,9 @@ class Armory(Util):
     def __init__(self, requests: str, ammo_file_path: str, logger: Config.log):
         """Armory constructor.
 
-        requests: list of a request-hashes from config
+        requests:  list of requests from config
         ammo_file: path to a file where results should be saved
-        logger: config logger.
+        logger:    config logger.
         """
         self.requests = requests
         self.ammo_file_path = ammo_file_path
