@@ -2,9 +2,9 @@
 """Tank ammo factory test cases."""
 import filecmp
 
-from armory import Armory, ConfigRequest
-
 import pytest
+
+from ..armory import Armory, ConfigRequest
 
 
 pytestmark = [pytest.mark.armory]

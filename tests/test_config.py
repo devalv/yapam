@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 """Config test cases."""
-
 import json
 
-from armory import AmmoConfig, ConfigRequest
-
 import pytest
+
+from ..armory import AmmoConfig, ConfigRequest
 
 
 pytestmark = [pytest.mark.config]
