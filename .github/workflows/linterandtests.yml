@@ -25,9 +25,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install flake8
+        python -m pip install flake8 pytest
         python -m pip install pipenv
-        python -m pip install pytest importlib-metadata
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f Pipfile.lock ]; then pipenv install --dev; fi
     - name: Lint with flake8
@@ -40,7 +39,7 @@ jobs:
         pipenv run flake8
     - name: Test with pytest
       run: |
-        pipenv run pytest
+        pipenv run pytest tests/
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
