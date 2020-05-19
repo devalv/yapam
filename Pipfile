@@ -16,7 +16,7 @@ pytest-cov = "==2.8.*"
 codecov = "==2.0.22"
 
 [requires]
-python_version = "3.8"
+python_version = "3.6"
 
 [packages]
 dav-utils = "==0.2.3"
