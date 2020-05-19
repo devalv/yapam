@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Phantom test cases."""
-import pytest
+from armory import PhantomAmmo
 
-from ..armory import PhantomAmmo
+import pytest
 
 
 pytestmark = [pytest.mark.phantom]
