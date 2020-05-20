@@ -1,24 +1,26 @@
 # -*- coding: utf-8 -*-
+"""Just example of runner."""
 
-"""Yet another phantom ammo maker."""
 import argparse
 import sys
+from distutils.util import strtobool
 
 from yapam.armory import Armory
 from yapam.config import AmmoConfig
 
 
 def parse_args():
-    """Парсер входных аргументов скрипта."""
+    """Script arguments parser."""
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', default='config.json', type=str,
                         help='Path to configuration file, ex: config.json')
-    parser.add_argument('--template', default=False, type=bool,
+    parser.add_argument('--template', default=False, type=strtobool, nargs='?', const=True,
                         help='Create config template')
     return parser.parse_args()
 
 
-def main():  # noqa
+def main():
+    """Will work when script running directly."""
     args = parse_args()
 
     if args.template:
