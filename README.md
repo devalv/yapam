@@ -1,21 +1,34 @@
-# Yapam: Yet another ammo generator for Yandex.tank
-==============================================
-
-
+![tests](https://github.com/devalv/yapam/workflows/Linter%20and%20tests/badge.svg)
+![build](https://github.com/devalv/yapam/workflows/Build%20Python%20Package/badge.svg)
+[![codecov](https://codecov.io/gh/devalv/yapam/branch/master/graph/badge.svg)](https://codecov.io/gh/devalv/yapam)
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
-TODO: badge for tests Action
-TODO: badge with coverage Action
-TODO: badge with build Action
-------------------------------------------------------------------------
-yapam is a tool that aims to simplify the process of working with Yandex.Tank
+[![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
 
-### TODO: story why i wrote it
+# Yapam
+Yapam is a tool that aims to simplify the process of working with [Yandex Tank](https://github.com/yandex-load/yandex-tank)
 
 Edit tool config and it automatically creates ammo that you can use for your tests.
-For now it can create only Phantom-type ammo.
+For now, it can create only Phantom-type ammo. If the app that you need to test is not stateless - probably you should
+find another way.
+
+I have nothing to do with the Tank or Yandex itself but was impressed by the great work that they did.
+#### Remark
+Sooner or later for any project, questions arise:
+
+```
+ What load can it handle? 
+ Which handlers are slow? 
+ What exactly happens if you increase the number of application instances?
+```
+
+Your first mind maybe `I should use one of the stress testing tools!`, but if you do not have colleagues who
+could do this, then the task will fall on your shoulders. In my opinion, Yandex Tank is an easy and convenient way
+to do this type of task (and as far as I know - it is free and opensource).
+The right way is to read official docs, but...
+Ok, if you want to do it ASAP here is a small Python script that will generate all you need to generate for tank shooting. 
 
 ## Installation
-Your Python version should be 3.6 or above. Simply install with python package manager like pip: 
+Your Python version should be 3.6 or above. Simply install with Python package manager like pip: 
 `pip install yapam`
 
 ## Configuration
@@ -28,7 +41,7 @@ Configuration file should be JSON-type file with .json extension.
 
 `LOG_LVL`: level of logging (same as Python basic logging levels)
 
-`AMMO_FILE`: path to file where results should be saved
+`AMMO_FILE`: a path to file where results should be saved
 
 `REQUESTS`: list of requests for your shooting
 
@@ -79,7 +92,7 @@ def main():
 
     if args.template:
         cfg = AmmoConfig()
-        cfg.log.debug('Trying to create template of configuration file.')
+        cfg.log.debug('Trying to create a template of configuration file.')
         cfg.create_template(args.config)
         cfg.log.debug('Exit.')
         sys.exit(0)
@@ -101,7 +114,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### create template for your future configuration file
+### create a template for your future configuration file
 `python app.py --template`
 
 ### edit configuration file
@@ -111,24 +124,37 @@ if __name__ == '__main__':
 
 ### use your ammo for tank shooting!
 
-## Я все прочитал, но ничего не понял. Что мне делать?
-1. Положить api-token от сервиса для онлайн-просмотра результатов в файл token.txt
-`echo 'fa30617b49bb4dadb2820fa3511ce420' >> $PYTHONPATH/tests/yandex.tank/token.txt`
-2. Актуализировать load.yaml для кейса.
-2. Выполнить генерацию патронов для кейса.
-3. Запустить контейнер с Yandex.Tank для кейса.
-4. Посмотреть результаты на https://overload.yandex.net/ 
-
-###### Запуск контейнера с Yandex.Tank
+## I read everything, but still did not understand anything. Show me a super short way to run the whole thing?
+### 1. Create your ammo via yapam
+### 2. Get your personal token on Overload and put it in to a file.
+https://overload.yandex.net/
+### 3. Edit **load.yaml** for shooting. 
+```
+phantom:
+  address: 127.0.0.1:80
+  ssl: false
+  load_profile:
+    load_type: rps
+    schedule: line(1, 10, 1m)
+  ammofile: /var/loadtest/ammo  # path inside yandex docker container (step 4)
+  ammo_type: phantom
+console:
+  enabled: true
+telegraf:
+  enabled: true
+uploader:
+  enabled: true
+  operator: <paste your username>
+  package: yandextank.plugins.DataUploader
+  token_file: <path to file with tour token> (step 2)
+```
+### 4. Run docker with Yandex Tank
 docker run -v $(pwd):/var/loadtest --net host -it direvius/yandex-tank
+### 5. See your results at Overload
+https://overload.yandex.net/
 
-## Additional docs
+## Here are some links to official docs
 https://yandex.ru/dev/tank/
 https://yandextank.readthedocs.io/en/latest/
 https://gist.github.com/sameoldmadness/9abeef4c2125bc760ba2f09ee1150330
 https://www.youtube.com/watch?v=gws7L3EaeC0
-https://overload.yandex.net/
-https://yandextank.readthedocs.io/en/latest/ammo_generators.html
-
-## Как мне предложить баг, фичу?
-123

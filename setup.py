@@ -10,7 +10,7 @@ setuptools.setup(
     version='0.1.0',
     author='Aleksey Devyatkin',
     author_email='devyatkin.av@ya.ru',
-    description='Yet another ammo generator for Yandex.Tank',
+    description='Yet another ammo generator for Yandex Tank',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/devalv/yapam',

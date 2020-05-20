@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Yet another ammo generator for Yandex.Tank (c).
+"""Yet another ammo generator for Yandex Tank.
 
 for additional info see README.md
 """
