@@ -1,0 +1,22 @@
+{
+  "LOG_DATE_FMT": "%H:%M:%S",
+  "LOG_FMT": "%(asctime)s.%(msecs)d|%(levelname).1s|%(message)s",
+  "LOG_LVL": "DEBUG",
+  "AMMO_FILE": "ammo",
+  "REQUESTS": [
+    {
+      "host": "127.0.0.1",
+      "port": 8888,
+      "url":  "/auth",
+      "method":  "POST",
+      "body": "{\"username\": \"admin\", \"password\": \"admin\"}"
+    },
+    {
+      "host": "127.0.0.1",
+      "port": 8888,
+      "url":  "/version",
+      "method":  "GET",
+      "case":  "CONFIG_CASE2"
+    }
+  ]
+}
