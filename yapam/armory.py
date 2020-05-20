@@ -8,7 +8,7 @@ from dav_utils.config import Config
 from dav_utils.descriptors import WritableFile
 from dav_utils.utils import Util
 
-from .phantom import PhantomAmmo
+from yapam.phantom import PhantomAmmo
 
 
 class Armory(Util):
