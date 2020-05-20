@@ -2,6 +2,12 @@
 """Ammo factory.
 
 Supported ammo types: Phantom
+In most cases, you need this particular module.
+
+Example of usage:
+    user_config = AmmoConfig('config.json')
+    armory = Armory(user_config.requests, user_config.ammo_file, user_config.log)
+    armory.generate_ammo()
 """
 
 from dav_utils.config import Config
@@ -12,7 +18,12 @@ from yapam.phantom import PhantomAmmo
 
 
 class Armory(Util):
-    """Ammo factory."""
+    """Ammo factory.
+
+    requests:       list of ConfigRequest instances, like [ConfigRequest, ]
+    ammo_file_path: path to file where result should be saved.
+    logger:         your logger instance. Transmitted to ammo class for debug logging. May be None.
+    """
 
     ammo_file_path = WritableFile('ammo_file_path')
 
