@@ -54,12 +54,8 @@ jobs:
       run: |
         pytest
     - name: Upload coverage to Codecov
-      env:
-        OS: ubuntu-latest
-        PYTHON: ${{ matrix.python-version }}
       uses: codecov/codecov-action@v1
       with:
         flags: unittests
-        env_vars: OS,PYTHON
         name: codecov-umbrella
         fail_ci_if_error: true
