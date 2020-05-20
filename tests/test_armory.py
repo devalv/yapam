@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Tank ammo factory test cases."""
+"""Ammo factory test cases."""
 import filecmp
 
-from armory import Armory, ConfigRequest
-
 import pytest
+
+from yapam.armory import Armory
+from yapam.config import ConfigRequest
 
 
 pytestmark = [pytest.mark.armory]

@@ -2,9 +2,9 @@
 """Config test cases."""
 import json
 
-from armory import AmmoConfig, ConfigRequest
-
 import pytest
+
+from yapam.config import AmmoConfig, ConfigRequest
 
 
 pytestmark = [pytest.mark.config]

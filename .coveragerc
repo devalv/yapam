@@ -4,7 +4,7 @@
 
 [report]
 include =
-    armory.py
+    yapam/*
 
 omit =
     tests/*
