@@ -1,0 +1,7 @@
+Package:      yapam
+Version:      0.1.1-2020.05.21
+Maintainer:   Aleksey Devyatkin <dal.dev@ya.ru>
+Architecture: all
+Section:      web
+Description:  Yet another ammo maker
+Depends:      python3 (>= 3.6)
