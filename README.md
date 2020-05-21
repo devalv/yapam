@@ -125,33 +125,7 @@ if __name__ == '__main__':
 ### use your ammo for tank shooting!
 
 ## I read everything, but still did not understand anything. Show me a super short way to run the whole thing?
-### 1. Create your ammo via yapam
-### 2. Get your personal token on Overload and put it in to a file.
-https://overload.yandex.net/
-### 3. Edit **load.yaml** for shooting. 
-```
-phantom:
-  address: 127.0.0.1:80
-  ssl: false
-  load_profile:
-    load_type: rps
-    schedule: line(1, 10, 1m)
-  ammofile: /var/loadtest/ammo  # path inside yandex docker container (step 4)
-  ammo_type: phantom
-console:
-  enabled: true
-telegraf:
-  enabled: true
-uploader:
-  enabled: true
-  operator: <paste your username>
-  package: yandextank.plugins.DataUploader
-  token_file: <path to file with tour token> (step 2)
-```
-### 4. Run docker with Yandex Tank
-docker run -v $(pwd):/var/loadtest --net host -it direvius/yandex-tank
-### 5. See your results at Overload
-https://overload.yandex.net/
+[Try this](https://github.com/devalv/yapam/wiki/Shut-up-and-give-it-to-me!)
 
 ## Here are some links to official docs
 https://yandex.ru/dev/tank/

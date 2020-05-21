@@ -7,10 +7,10 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='yapam',
-    version='0.1.0',
+    version='0.1.1',
     author='Aleksey Devyatkin',
     author_email='devyatkin.av@ya.ru',
-    description='Yet another ammo generator for Yandex Tank',
+    description='Yet another ammo maker',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/devalv/yapam',
