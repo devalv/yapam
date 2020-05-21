@@ -125,7 +125,7 @@ if __name__ == '__main__':
 ### use your ammo for tank shooting!
 
 ## I read everything, but still did not understand anything. Show me a super short way to run the whole thing?
-[Try this](https://github.com/devalv/yapam/wiki/Shut-up-and-give-me-my-ammo!)
+[Try this](https://github.com/devalv/yapam/wiki/Shut-up-and-give-it-to-me!)
 
 ## Here are some links to official docs
 https://yandex.ru/dev/tank/

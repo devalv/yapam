@@ -130,3 +130,6 @@ dmypy.json
 
 # IDEA configurations
 .idea/
+
+# DEB binary files
+*.deb
