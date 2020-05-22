@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """Ammo factory test cases."""
-import filecmp
-
 import pytest
 
 from yapam.armory import Armory
@@ -20,28 +18,25 @@ def config_requests(config_request):
 
 @pytest.fixture
 def armory_instance(logger, temporary_ammo_file, config_requests):
-    """Fixture with Armory instance."""
+    """Armory instance."""
     return Armory(requests=config_requests, ammo_file_path=temporary_ammo_file, logger=logger)
 
 
 @pytest.fixture
-def phantom_ammo_blueprint(tmpdir_factory):
-    """Fixture that create expected ammo file for compare."""
-    fn = tmpdir_factory.mktemp('data').join('ammo')
-    data = (
-        '192 /auth\n'
-        'POST /auth HTTP/1.1\r\n'
-        'Host: 127.0.0.1:8888\r\n'
-        'User-Agent: phantom\r\n'
-        'Accept: */*\r\n'
-        'Content-Type: application/json\r\n'
-        'Connection: Close\r\n'
-        'Content-Length: 42\r\n\r\n'
-        '{"username": "admin", "password": "admin"}\r\n\r\n'
-    )
-    with open(fn, 'w', encoding='utf-8') as f:
-        f.write(data)
-    return fn
+def phantom_ammo_blueprint():
+    """List of lines that should be in ammo file after script finish."""
+    data = [
+        '192 /auth',
+        'POST /auth HTTP/1.1',
+        'Host: 127.0.0.1:8888',
+        'User-Agent: phantom',
+        'Accept: */*',
+        'Content-Type: application/json',
+        'Connection: Close',
+        'Content-Length: 42',
+        '{"username": "admin", "password": "admin"}',
+    ]
+    return data
 
 
 class TestArmory:
@@ -53,5 +48,20 @@ class TestArmory:
 
     def test_generate_ammo(self, armory_instance, phantom_ammo_blueprint):
         """Check that armory can generate phantom ammo as expected."""
+        # Check that ammo generated without errors
         assert armory_instance.generate_ammo()
-        assert filecmp.cmp(armory_instance.ammo_file_path, phantom_ammo_blueprint)
+
+        # Parse created file to list format
+        ammo_lines = list()
+        with open(armory_instance.ammo_file_path, 'r') as f:
+            for line in f.readlines():
+                el = line.strip()
+                if el:
+                    ammo_lines.append(el)
+
+        # Because of unordered dict in 3.5 lists may be different (headers)
+        ammo_lines.sort()
+        phantom_ammo_blueprint.sort()
+
+        # Compare list
+        assert ammo_lines == phantom_ammo_blueprint

@@ -8,18 +8,18 @@ import pytest
 @pytest.fixture(scope='session')
 def temporary_log_file(tmpdir_factory):
     """Temporary log file."""
-    return tmpdir_factory.mktemp('data').join('tmp.log')
+    return str(tmpdir_factory.mktemp('data').join('tmp.log'))
 
 
 @pytest.fixture(scope='session')
 def temporary_json_file(tmpdir_factory):
     """Temporary JSON file."""
-    return tmpdir_factory.mktemp('data').join('cfg.json')
+    return str(tmpdir_factory.mktemp('data').join('cfg.json'))
 
 
 @pytest.fixture
 def logger(temporary_log_file):
-    """Fixture with logger instance."""
+    """Logger instance."""
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.DEBUG)
     logger.addHandler(logging.FileHandler(temporary_log_file))
@@ -34,7 +34,7 @@ def temporary_ammo_file(tmpdir_factory):
 
 @pytest.fixture
 def config_request():
-    """Fixture with parameters in the ConfigRequest."""
+    """Parameters in the ConfigRequest."""
     request_dict = {
         'host': '127.0.0.1',
         'port': 8888,

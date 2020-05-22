@@ -12,7 +12,7 @@ pytestmark = [pytest.mark.config]
 
 @pytest.fixture
 def bad_config_request():
-    """Fixture with parameters missing in the ConfigRequest."""
+    """Parameters missing in the ConfigRequest."""
     request_dict = {
         'host': '127.0.0.1',
         'port': 8888,
@@ -26,8 +26,8 @@ def bad_config_request():
 
 @pytest.fixture(scope='session')
 def good_config_file(tmpdir_factory):
-    """Fixture with temporary config file."""
-    fn = tmpdir_factory.mktemp('data').join('data.json')
+    """Temporary config file."""
+    fn = str(tmpdir_factory.mktemp('data').join('data.json'))
     with open(fn, 'w', encoding='utf-8') as f:
         json.dump(AmmoConfig().template_blueprint, f, ensure_ascii=False, indent=4)
     return fn
@@ -35,8 +35,8 @@ def good_config_file(tmpdir_factory):
 
 @pytest.fixture(scope='session')
 def bad_config_file(tmpdir_factory):
-    """Fixture with temporary bad config file."""
-    fn = tmpdir_factory.mktemp('data').join('data.json')
+    """Temporary bad config file."""
+    fn = str(tmpdir_factory.mktemp('data').join('data.json'))
     data = AmmoConfig().template_blueprint
     # add bad parameter
     data['REQUESTS'] = [

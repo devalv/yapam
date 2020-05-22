@@ -90,7 +90,7 @@ class PhantomAmmo:
         for key, value in value.items():
             # all key words must be capitalized
             header_key = '-'.join([word.lower().capitalize() for word in key.split('-')])
-            header_str = f'{header_key}: {value}'
+            header_str = '{key}: {val}'.format(key=header_key, val=value)
             headers_list.append(header_str)
         self.__headers = '\r\n'.join(headers_list)
 
