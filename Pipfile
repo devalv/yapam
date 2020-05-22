@@ -4,19 +4,20 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
-flake8 = "==3.7.*"
-flake8-builtins = "==1.5.*"
-flake8-bugbear = "==20.1.*"
-flake8-import-order = "==0.18.*"
-flake8-docstrings = "==1.5.*"
-flake8-quotes = "==3.0.*"
-pytest = "==5.4.*"
-pytest-flake8 = "==1.0.*"
-pytest-cov = "==2.8.*"
-codecov = "==2.0.*"
+flake8 = "==3.7.9"
+flake8-builtins = "==1.5.2"
+flake8-bugbear = "==19.8.0"
+flake8-import-order= "==0.18.1"
+flake8-docstrings = "==1.5.0"
+flake8-quotes = "==3.0.0"
+coverage = "==5.1"
+codecov = "==2.0.22"
+pytest = "*"
+pytest-flake8 = "*"
+pytest-cov = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.5"
 
 [packages]
 dav-utils = "==0.2.3"
