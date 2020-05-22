@@ -50,9 +50,9 @@ class ConfigRequestType:
             try:
                 instance.__dict__[self.name] = [ConfigRequest(**value) for value in raw_values_list]
             except TypeError:
-                raise TypeError(f'{self.name} contains bad parameters.')
+                raise TypeError('{} contains bad parameters.'.format(self.name))
         else:
-            raise TypeError(f'{self.name} should be a list.')
+            raise TypeError('{} should be a list.'.format(self.name))
 
     def __get__(self, instance, class_):
         """Return attribute value."""
