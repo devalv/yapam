@@ -32,7 +32,7 @@ def main():
 
     try:
         user_config = AmmoConfig(args.config)
-        user_config.log.debug(f'Configuration file loaded: {user_config.public_attrs()}')
+        user_config.log.debug('Configuration file loaded: {}'.format(user_config.public_attrs()))
 
         armory = Armory(user_config.requests, user_config.ammo_file, user_config.log)
         armory.generate_ammo()

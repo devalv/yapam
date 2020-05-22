@@ -1,7 +1,9 @@
 ![tests](https://github.com/devalv/yapam/workflows/Linter%20and%20tests/badge.svg)
 ![build](https://github.com/devalv/yapam/workflows/Build%20Python%20Package/badge.svg)
 [![codecov](https://codecov.io/gh/devalv/yapam/branch/master/graph/badge.svg)](https://codecov.io/gh/devalv/yapam)
+[![Python 3.5](https://img.shields.io/badge/python-3.5-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
 
 # Yapam
@@ -28,7 +30,7 @@ The right way is to read official docs, but...
 Ok, if you want to do it ASAP here is a small Python script that will generate all you need to generate for tank shooting. 
 
 ## Installation
-Your Python version should be 3.6 or above. Simply install with Python package manager like pip: 
+Your Python version should be 3.5 or above. Simply install with Python package manager like pip: 
 `pip install yapam`
 
 ## Configuration
