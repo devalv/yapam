@@ -1,3 +1,5 @@
+# Manually build deb-package.
+
 name: Build deb binary package
 
 on:
