@@ -19,8 +19,8 @@ jobs:
       with:
         ref: ${{ github.head_ref }}
     - name: linting
-      uses: ./linterandtests.yml
+      uses: ./.github/workflows/linterandtests.yml
     - name: build
-      uses: ./pythonbuild.yml
+      uses: ./.github/workflows/pythonbuild.yml
     - name: check
       run: ls -lah && pwd
