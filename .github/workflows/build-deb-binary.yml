@@ -18,6 +18,8 @@ jobs:
     - uses: actions/checkout@v2
       with:
         ref: ${{ github.head_ref }}
+    - name: check
+      run: ls -lah && pwd
     - name: linting
       uses: ./.github/workflows/linterandtests.yml
     - name: build
