@@ -31,6 +31,10 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install pipenv
         pipenv install --dev
+    - name: Generate pipenv lock
+      run: |
+        pipenv lock --dev --requirements > dev_requirements.txt
+        pipenv lock --requirements > requirements.txt
     - name: Install dependencies via pip
       run: |
         python -m pip install -r dev_requirements.txt
