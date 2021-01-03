@@ -1,3 +1,5 @@
+# Manually build deb-package.
+
 name: Build deb binary package
 
 on:
@@ -18,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ ${{ github.event.inputs.python-version }} ]
+        python-version: ${{ github.event.inputs.python-version }}
 
     steps:
     - uses: actions/checkout@v2
