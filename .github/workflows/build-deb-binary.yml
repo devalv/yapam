@@ -3,7 +3,7 @@ name: Build deb binary package
 on:
   workflow_dispatch:
     inputs:
-      name:
+      version:
         description: 'Specify version'
         required: true
 
@@ -13,16 +13,52 @@ jobs:
   build-deb:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ 3.5 ]
 
     steps:
     - uses: actions/checkout@v2
       with:
         ref: ${{ github.head_ref }}
-    - name: check
-      run: ls -lah && pwd
-    - name: linting
-      uses: ./.github/workflows/linterandtests.yml
-    - name: build
-      uses: ./.github/workflows/pythonbuild.yml
-    - name: check
-      run: ls -lah && pwd
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies to pipenv
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install pipenv
+        pipenv install --dev
+    - name: Generate pipenv lock
+      run: |
+        # generate dev requirements
+        pipenv lock --dev --requirements > dev_requirements.txt
+        # generate main requirements
+        pipenv lock --requirements > requirements.txt
+    - name: Install dependencies via pip
+      run: |
+        # installing dev requirements
+        python -m pip install -r dev_requirements.txt
+        # installing main requirements
+        python -m pip install -r requirements.txt
+    - name: List installed packages
+      run: |
+        python -m pip list
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        # run default configuration
+        flake8
+    - name: Test with pytest
+      run: |
+        pytest
+    - name: build deb package
+      run: sh make_binary.sh -v ${{ github.event.inputs.version }}
+    - uses: actions/upload-artifact@v2
+      with:
+        name: deb-package
+        path: yapam-${{ github.event.inputs.version }}.deb
