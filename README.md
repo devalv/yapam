@@ -57,9 +57,9 @@ Configuration file should be JSON-type file with .json extension.
     {
       "host": "127.0.0.1",
       "port": 8888,
-      "url":  "/auth",
+      "url":  "http://127.0.0.1:8000/api/auth",
       "method":  "POST",
-      "body": "{\"username\": \"admin\", \"password\": \"admin\"}"
+      "body": "{"username": "admin", "password": "admin"}"
     }
   ]
 }
