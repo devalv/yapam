@@ -40,6 +40,6 @@ def config_request():
         'port': 8888,
         'url': '/auth',
         'method': 'POST',
-        'body': '{\"username\": \"admin\", \"password\": \"admin\"}'
+        'body': {'username': 'admin', 'password': 'admin'}
     }
     return request_dict
