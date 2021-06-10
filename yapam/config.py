@@ -21,7 +21,7 @@ class ConfigRequest:
     method = HttpMethod('method')
     url = StringType('url')
     host = StringType('host')
-    body = StringType('body')
+    body = DictType('body')
     port = IntType('port')
     extra_headers = DictType('extra_headers')
 
