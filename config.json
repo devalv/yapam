@@ -7,14 +7,14 @@
     {
       "host": "127.0.0.1",
       "port": 8888,
-      "url":  "/auth",
+      "url":  "http://127.0.0.1:8000/auth",
       "method":  "POST",
       "body": {"username": "admin", "password": "admin"}
     },
     {
       "host": "127.0.0.1",
       "port": 8888,
-      "url":  "/version",
+      "url":  "http://127.0.0.1:8000/version",
       "method":  "GET",
       "case":  "CONFIG_CASE2"
     }
