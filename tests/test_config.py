@@ -18,7 +18,7 @@ def bad_config_request():
         'port': 8888,
         'url': '/auth',
         'method': 'POST',
-        'body': '{\"username\": \"admin\", \"password\": \"admin\"}',
+        'body': {'username': 'admin', 'password': 'admin'},
         'headers': 'headers'
     }
     return request_dict

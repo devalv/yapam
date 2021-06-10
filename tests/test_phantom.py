@@ -26,7 +26,7 @@ def phantom_ammo_dict(logger):
         'log': logger,
         'case': 'tests',
         'extra_headers': {'Authorization': 'token'},
-        'body': ''
+        'body': {}
     }
     return ammo_dict
 
@@ -36,7 +36,7 @@ def phantom_ammo_with_body_dict(phantom_ammo_dict):
     """Phantom ammo parameters with body."""
     ammo_dict = phantom_ammo_dict
     ammo_dict['method'] = 'POST'
-    ammo_dict['body'] = '{\"username\": \"admin\", \"password\": \"admin\"}'
+    ammo_dict['body'] = {'username': 'admin', 'password': 'admin'}
     ammo_dict['log'] = None
     return ammo_dict
 
@@ -78,7 +78,7 @@ def phantom_request_with_body_dict(phantom_headers_with_body_dict):
     body_dict = dict()
     body_dict['1'] = 'POST /auth HTTP/1.1'
     body_dict['2'] = phantom_headers_with_body_dict
-    body_dict['3'] = '{"username": "admin", "password": "admin"}'
+    body_dict['3'] = "{'username': 'admin', 'password': 'admin'}"
     return body_dict
 
 
@@ -142,11 +142,16 @@ class TestPhantomAmmo:
         """Check that headers property converted as expected."""
         assert convert_headers_str_to_dict(phantom_ammo_inst.headers) == phantom_headers_dict
 
-    def test_request_property(self, phantom_ammo_inst, phantom_request_dict):
+    def test_request_property(self,
+                              phantom_ammo_inst,
+                              phantom_request_dict):
         """Check that request property converted as expected."""
         assert self.convert_request_str_to_dict(phantom_ammo_inst.request) == phantom_request_dict
 
-    def test_bullet_property(self, phantom_ammo_inst, phantom_bullet_dict, temporary_log_file):
+    def test_bullet_property(self,
+                             phantom_ammo_inst,
+                             phantom_bullet_dict,
+                             temporary_log_file):
         """Check that bullet property converted as expected."""
         assert self.convert_bullet_str_to_dict(phantom_ammo_inst.bullet) == phantom_bullet_dict
 
@@ -169,8 +174,8 @@ class TestPhantomAmmoWithBody:
     """Phantom ammo with body test cases."""
 
     @staticmethod
-    def convert_request_with_str_with_body_to_dict(request_str: str) -> dict:
-        """Convert request in str format to dict."""
+    def convert_request_with_body_to_dict(request_str: str) -> dict:
+        """Convert request in str format to a dict."""
         str_list = [el for el in request_str.split('\r\n') if el]
         request_dict = dict()
         request_dict['1'] = str_list[0]
@@ -180,8 +185,8 @@ class TestPhantomAmmoWithBody:
         return request_dict
 
     @staticmethod
-    def convert_bullet_with_body_str_to_dict(bullet_str: str) -> dict:
-        """Convert request in str format to dict."""
+    def convert_bullet_with_body_to_dict(bullet_str: str) -> dict:
+        """Convert request in str format to a dict."""
         str_list = [el for el in bullet_str.replace('\r', '').split('\n') if el]
         bullet_dict = dict()
         bullet_dict['0'] = str_list[0]
@@ -201,10 +206,10 @@ class TestPhantomAmmoWithBody:
 
     def test_request_property(self, phantom_ammo_with_body_inst, phantom_request_with_body_dict):
         """Check that request property converted as expected."""
-        assert self.convert_request_with_str_with_body_to_dict(
+        assert self.convert_request_with_body_to_dict(
             phantom_ammo_with_body_inst.request) == phantom_request_with_body_dict
 
     def test_bullet_property(self, phantom_ammo_with_body_inst, phantom_bullet_with_body_dict):
         """Check that bullet property converted as expected."""
-        assert self.convert_bullet_with_body_str_to_dict(
+        assert self.convert_bullet_with_body_to_dict(
             phantom_ammo_with_body_inst.bullet) == phantom_bullet_with_body_dict

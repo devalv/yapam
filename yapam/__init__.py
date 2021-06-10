@@ -5,9 +5,9 @@
 for additional info see README.md
 """
 
-__version__ = '0.1.2'
+__version__ = '0.1.4'
 __all__ = [
     'armory', 'config', 'phantom'
 ]
 
-__author__ = 'Aleksey Devyatkin <devyatkin.av@ya.ru>'
+__author__ = 'Devyatkin Aleksei <yapam@devyatkin.dev>'

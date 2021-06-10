@@ -98,15 +98,21 @@ class PhantomAmmo:
     def request(self):
         """Phantom-type bullet http request."""
         if self.body:
-            return self.body_template.format(method=self.method, url=self.url, headers=self.headers,
-                                             content_length=len(self.body), body=self.body)
-        return self.no_body_template.format(method=self.method, url=self.url, headers=self.headers)
+            return self.body_template.format(method=self.method, url=self.url,
+                                             headers=self.headers,
+                                             content_length=len(str(self.body)),
+                                             body=self.body)
+        return self.no_body_template.format(method=self.method,
+                                            url=self.url,
+                                            headers=self.headers)
 
     @property
     def bullet(self):
         """Phantom-type bullet for load generator."""
         request = self.request
-        ammo = self.ammo_template.format(request_length=len(request), case=self.case, request=request)
+        ammo = self.ammo_template.format(request_length=len(request),
+                                         case=self.case,
+                                         request=request)
         if self.log:
             self.log.debug(ammo.replace('\r\n', ', ').replace('\n', ', '))
         return ammo

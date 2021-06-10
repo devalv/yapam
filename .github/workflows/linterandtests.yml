@@ -4,7 +4,7 @@ name: Linter and tests
 
 on:
   pull_request:
-    branches: [ develop, master ]
+    branches: [ master ]
 
 jobs:
   tests:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.5]
+        python-version: [3.9]
 
     steps:
     - uses: actions/checkout@v2

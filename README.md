@@ -1,15 +1,14 @@
 ![tests](https://github.com/devalv/yapam/workflows/Linter%20and%20tests/badge.svg)
 ![build](https://github.com/devalv/yapam/workflows/Build%20Python%20Package/badge.svg)
 [![codecov](https://codecov.io/gh/devalv/yapam/branch/master/graph/badge.svg)](https://codecov.io/gh/devalv/yapam)
-[![Python 3.5](https://img.shields.io/badge/python-3.5-blue.svg)](https://www.python.org/downloads/release/python-360/)
-[![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
-[![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
 [![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
+[![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 
 # Yapam
 Yapam is a tool that aims to simplify the process of working with [Yandex Tank](https://github.com/yandex-load/yandex-tank)
 
-Edit tool config and it automatically creates ammo that you can use for your tests.
+Edit tool config, and it automatically creates ammo that you can use for your tests.
 For now, it can create only Phantom-type ammo. If the app that you need to test is not stateless - probably you should
 find another way.
 

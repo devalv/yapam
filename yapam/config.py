@@ -34,7 +34,7 @@ class ConfigRequest:
         self.port = port
         self.case = case if case else url
         self.extra_headers = extra_headers if extra_headers else dict()
-        self.body = body if body else ''
+        self.body = body if body else dict()
 
 
 class ConfigRequestType:
@@ -49,7 +49,8 @@ class ConfigRequestType:
         if isinstance(raw_values_list, list):
             try:
                 instance.__dict__[self.name] = [ConfigRequest(**value) for value in raw_values_list]
-            except TypeError:
+            except TypeError as E:
+                print(E)
                 raise TypeError('{} contains bad parameters.'.format(self.name))
         else:
             raise TypeError('{} should be a list.'.format(self.name))
@@ -100,7 +101,7 @@ class AmmoConfig(Config):
                     'port': 80,
                     'url': 'AUTH',
                     'method': 'POST',
-                    'body': '{\"username\": \"tank_user_0\", \"password\": \"tank_user_0\"}'
+                    'body': {"username": "tank_user_0", "password": "tank_user_0"}
                 }]
         }
         return config_template
