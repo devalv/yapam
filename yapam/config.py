@@ -101,7 +101,7 @@ class AmmoConfig(Config):
                     'port': 80,
                     'url': 'AUTH',
                     'method': 'POST',
-                    'body': {"username": "tank_user_0", "password": "tank_user_0"}
+                    'body': {'username': 'tank_user_0', 'password': 'tank_user_0'}
                 }]
         }
         return config_template
