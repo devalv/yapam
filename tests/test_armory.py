@@ -34,7 +34,7 @@ def phantom_ammo_blueprint():
         'Content-Type: application/json',
         'Connection: Close',
         'Content-Length: 42',
-        "{'username': 'admin', 'password': 'admin'}",
+        '{"username": "admin", "password": "admin"}',
     ]
     return data
 

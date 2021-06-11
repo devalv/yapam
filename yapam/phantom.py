@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Ammo for phantom load generator."""
 
+from json import dumps
+
 
 class PhantomAmmo:
     """PhantomAmmo blueprint.
@@ -76,6 +78,8 @@ class PhantomAmmo:
         headers.update(self.default_headers)
 
         self.headers = headers
+        if body and isinstance(body, dict):
+            body = dumps(body)
         self.body = body
 
     @property

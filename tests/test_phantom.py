@@ -78,7 +78,7 @@ def phantom_request_with_body_dict(phantom_headers_with_body_dict):
     body_dict = dict()
     body_dict['1'] = 'POST /auth HTTP/1.1'
     body_dict['2'] = phantom_headers_with_body_dict
-    body_dict['3'] = "{'username': 'admin', 'password': 'admin'}"
+    body_dict['3'] = '{"username": "admin", "password": "admin"}'
     return body_dict
 
 

@@ -7,7 +7,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='yapam',
-    version='0.1.4',
+    version='0.1.5',
     author='Devyatkin Aleksei',
     author_email='yapam@devyatkin.dev',
     description='Yet another ammo maker',
@@ -18,7 +18,7 @@ setuptools.setup(
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
-        'Operating System :: OS Independent',
+        'Operating System :: OS Linux',
     ],
     python_requires='>=3.7',
     install_requires=['dav-utils==0.2.*']
