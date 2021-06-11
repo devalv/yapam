@@ -18,7 +18,7 @@ setuptools.setup(
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
-        'Operating System :: OS Linux',
+        'Operating System :: POSIX :: Linux',
     ],
     python_requires='>=3.7',
     install_requires=['dav-utils==0.2.*']
