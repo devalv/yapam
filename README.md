@@ -49,17 +49,24 @@ Configuration file should be JSON-type file with .json extension.
 #### Example:
 ```
 {
+  "AMMO_FILE": "ammo",
   "LOG_DATE_FMT": "%H:%M:%S",
   "LOG_FMT": "%(asctime)s.%(msecs)d|%(levelname).1s|%(message)s",
   "LOG_LVL": "DEBUG",
-  "AMMO_FILE": "ammo",
   "REQUESTS": [
+    {
+      "host": "192.168.7.178",
+      "url": "/api/auth",
+      "port": 443,
+      "method": "POST",
+      "body": {"username": "vdiadmin", "password": "admin"}
+    },
     {
       "host": "127.0.0.1",
       "port": 8888,
-      "url":  "http://127.0.0.1:8000/api/auth",
+      "url":  "/auth",
       "method":  "POST",
-      "body": "{"username": "admin", "password": "admin"}"
+      "body": {"username": "admin", "password": "admin"}
     }
   ]
 }
